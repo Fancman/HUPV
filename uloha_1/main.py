@@ -19,8 +19,8 @@ trainset = torchvision.datasets.ImageFolder(root='dogscats/train', transform=tra
 valset = torchvision.datasets.ImageFolder(root='dogscats/valid', transform=transform)
 
 model = models.resnet18(pretrained=True)
-for param in model.parameters():
-    param.requires_grad = False
+#for param in model.parameters():
+#    param.requires_grad = False
 model.fc = torch.nn.Linear(model.fc.in_features, 2)
 
 optimizer = torch.optim.Adam(model.fc.parameters(), lr=1e-3)
@@ -64,8 +64,8 @@ def one_epoch(model, optimizer, dataloader_train, dataloader_val, verbose=True, 
 
 batch_size = 128
 
-dataloader_train = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True)
-dataloader_val = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=False)
+dataloader_train = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, workers=4)
+dataloader_val = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=False, workers=4)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
