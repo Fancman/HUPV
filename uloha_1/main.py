@@ -62,7 +62,7 @@ def one_epoch(model, optimizer, dataloader_train, dataloader_val, verbose=True, 
 
   return np.mean(train_losses), np.mean(val_losses), val_acc
 
-batch_size = 32
+batch_size = 128
 
 dataloader_train = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True)
 dataloader_val = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=False)
